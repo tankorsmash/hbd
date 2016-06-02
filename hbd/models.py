@@ -1,6 +1,15 @@
 from django.db import models
 from django.db.models import fields
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User as djUser
+
+class User(djUser):
+	def __unicode__(self):
+		return u"#{id}@{username} {firstname} {lastname}".format(
+			id=self.id,
+			username=self.username,
+			firstname=self.first_name,
+			lastname=self.last_name,
+		)
 
 # Create your models here.
 class Birthday(models.Model):
