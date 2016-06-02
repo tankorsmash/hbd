@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.IndexView.as_view(), name='index'),
     url(r'^add$', views.AddUserView.as_view(), name='add_user'),
+    url(r'^today/(?P<user_id>\d*)/(?P<days>\d*)$', views.TodayView.as_view(), name='today'),
 ]

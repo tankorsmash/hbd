@@ -38,7 +38,7 @@
 			</div>
 			|
 			<div class="row cheers">
-				{{ user.cheers_made.all }}
+				{{ user.cheers_made.count }}
 			</div>
 			|
 			<div class="row birthday">
@@ -46,7 +46,7 @@
 			</div>
 			|
 			<div class="row cheers_to">
-				{{ user.cheers_to.all }}
+				{{ user.cheers_to.count }}
 			</div>
 		</div>
 		{% endfor %}
