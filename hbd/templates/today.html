@@ -1,0 +1,42 @@
+<head>
+	<style>
+div {
+	font-size: 24;
+}
+		.row {
+			display: inline-block;
+			margin: 0 10px 0 10px;
+		}
+	</style>
+</head>
+
+<div>
+	Today is {{ today }}!
+</div>
+
+<div>
+	But is it anyone's birthday?
+
+	<div id="birthdays">
+		{% for user in birthdays %}
+		<div class="user-cell">
+			<div class="row username">
+				{{ user.username }},
+			</div>
+			how many cheers does this cutie have?
+			<div class="row cheers_to">
+				{{ user.cheers_to.first.count }}
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+</div>
+<br>
+<form action="" method="post">
+	{% csrf_token %}
+	<div>
+		Do you want to cheers these people?
+	</div>
+	<input type='submit' />
+</form>
+</div>

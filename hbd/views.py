@@ -1,6 +1,7 @@
 import time
 import datetime
 
+from django.db.models import F
 from django.shortcuts import render
 from django.core.urlresolvers import reverse
 from django.views.generic import TemplateView, FormView
@@ -48,3 +49,23 @@ class TodayView(TemplateView):
 
 		context['birthdays'] = User.objects.filter(birthday__date__month=today.month, birthday__date__day=today.day)
 		return context
+
+	def post(self, request, *args, **kwargs):
+		context = self.get_context_data()
+		current_user = context['user']
+		for user in context['birthdays']:
+			cheers = Cheers.objects.filter(target_user=user)
+			if not cheers:
+				cheers = Cheers.objects.create(target_user=user)
+				print 'creating cheers'
+			else:
+				print 'found cheers'
+				cheers = cheers.last()
+
+			if not current_user in cheers.pals.all():
+				cheers.pals.add(current_user)
+
+		cheers.count = F("count") + 1
+		cheers.save()
+
+		return self.get(request, *args, **kwargs)
