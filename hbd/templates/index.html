@@ -1,7 +1,55 @@
 <head>
 	<title>Happy Birthday!</title>
+
+	<style>
+		#user-list {
+			color: blue;
+			display: inline-block;
+		}
+
+		.row {
+			display: inline-block;
+			margin: 0 10px 0 10px;
+		}
+
+		.username {
+		}
+
+		.cheers {
+		}
+
+		.birthday {
+		}
+
+		.cheers_to {
+		}
+	</style>
 </head>
 
 <body>
 	<div>This is the best day of your life</div>
+
+	<h3>User | cheers made | birthday | cheers received list</h3>
+	<div id="user-list">
+		{% for user in users %}
+		<div class="user-cell">
+			<div class="row username">
+				{{ user.username }}
+			</div>
+			|
+			<div class="row cheers">
+				{{ user.cheers_made.all }}
+			</div>
+			|
+			<div class="row birthday">
+				{{ user.birthday.date }}
+			</div>
+			|
+			<div class="row cheers_to">
+				{{ user.cheers_to.all }}
+			</div>
+		</div>
+		{% endfor %}
+
+	</div>
 </body>
